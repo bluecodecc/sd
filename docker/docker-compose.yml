@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  mysql:
+    container_name: mysql_sd
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: AdUao7r*]MLFVQujR+9K
+      MYSQL_DATABASE: sd
+      MYSQL_USER: sd
+      MYSQL_PASSWORD: J4]ZzY!W4w=Q#LaE5QF
+    networks:
+      - sd
+
+  web:
+    container_name: nginx_sd
+    restart: always
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "8080:80"
+    networks:
+      - sd
+
+  php:
+    container_name: php_sd
+    restart: always
+    build:
+      context: .
+      dockerfile: php/Dockerfile
+    networks:
+      - sd
+
+networks:
+  sd:
+    driver: bridge
