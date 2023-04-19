@@ -31,8 +31,7 @@ class ImageServer:
         files = {'file': image}
         return requests.post(headers=headers, url=url, files=files).json()
 
-
-def images(self):
-    url = f'{self.url}/images'
-    headers = {"Authorization": f"Bearer {self.token}", "Accept": "application/json", }
-    return requests.get(headers=headers, url=url)
+    def images(self):
+        url = f'{self.url}/images'
+        headers = {"Authorization": f"Bearer {self.token}", "Accept": "application/json", }
+        return requests.get(headers=headers, url=url)

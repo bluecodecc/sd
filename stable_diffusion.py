@@ -13,10 +13,11 @@ class StableDiffusion:
         response = requests.post(url=url, json=payload).json()
         images: list = []
         for image_data in response.get("images"):
-            info = self.get_img_info(image_data)
+            png_info = self.get_img_info(image_data)
             image = Image.open(io.BytesIO(base64.b64decode(image_data.split(",", 1)[0])))
-            # image.info = info
-            images.append(image)
+            image.save("temp.png", format='PNG', png_info=png_info)
+            t = open("temp.png", "rb")
+            images.append(t)
         return images
 
     def get_img_info(self, image):
